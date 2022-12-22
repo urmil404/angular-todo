@@ -1,1 +1,8 @@
-<p>todos works!</p>
+<app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
+
+<div *ngIf="this.todos.length===0; else elseBlock">No Todos to Display</div>
+<ng-template #elseBlock>
+    <div *ngFor="let td of todos">
+        <app-todo-item [todo]="td" (todoDelete)="deleteTodo($event)"></app-todo-item>
+    </div>
+</ng-template>
