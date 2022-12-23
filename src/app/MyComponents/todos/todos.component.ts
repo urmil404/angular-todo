@@ -7,41 +7,25 @@ import { Todo } from '../../Todo';
 })
 export class TodosComponent {
   todos: Todo[];
+  localItem: string | null;
+
   constructor() {
-    this.todos = [
-      {
-        sno: 1,
-        title: 'todo title 1',
-        desc: 'todo desc 1',
-        active: true,
-      },
-      {
-        sno: 2,
-        title: 'todo title 2',
-        desc: 'todo desc 2',
-        active: true,
-      },
-      {
-        sno: 3,
-        title: 'todo title 3',
-        desc: 'todo desc 3',
-        active: true,
-      },
-      {
-        sno: 4,
-        title: 'todo title 4',
-        desc: 'todo desc 4',
-        active: true,
-      },
-    ];
+    this.localItem = localStorage.getItem('todos');
+    if (this.localItem === null) {
+      this.todos = [];
+    } else {
+      this.todos = JSON.parse(this.localItem);
+    }
   }
   deleteTodo(todo: Todo) {
     console.log(todo);
-	  const index = this.todos.indexOf(todo);
-	  this.todos.splice(index, 1);
+    const index = this.todos.indexOf(todo);
+    this.todos.splice(index, 1);
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
   addTodo(todo: Todo) {
     console.log(todo);
     this.todos.push(todo);
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 }
