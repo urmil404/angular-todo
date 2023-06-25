@@ -2,7 +2,7 @@
 
 <div *ngIf="this.todos.length===0; else elseBlock">No Todos to Display</div>
 <ng-template #elseBlock>
-    <div *ngFor="let td of todos">
+    <div *ngFor="let td of todos" class="row">
         <app-todo-item [todo]="td" (todoDelete)="deleteTodo($event)"></app-todo-item>
     </div>
 </ng-template>
